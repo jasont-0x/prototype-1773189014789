@@ -1,0 +1,68 @@
+{% extends "govuk/template.njk" %}
+
+{% block pageTitle %}Check your answers before sending your application – {{ serviceName }} – GOV.UK{% endblock %}
+
+{% block header %}
+  {{ govukHeader({
+    homepageUrl: "https://www.gov.uk",
+    serviceName: serviceName,
+    serviceUrl: "/"
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    <h1 class="govuk-heading-xl">Check your answers before sending your application</h1>
+
+    {{ govukSummaryList({
+      rows: [
+      {
+        key: { text: "Do you have an existing written agreement about child arrangements?" },
+        value: { text: data['have-existing-agreement'] or "Not provided" },
+        actions: {
+          items: [{ href: "/have-existing-agreement", text: "Change", visuallyHiddenText: "do you have an existing written agreement about child arrangements?" }]
+        }
+      },
+      {
+        key: { text: "Do both parents agree to make this arrangement legally binding?" },
+        value: { text: data['both-parents-agree'] or "Not provided" },
+        actions: {
+          items: [{ href: "/both-parents-agree", text: "Change", visuallyHiddenText: "do both parents agree to make this arrangement legally binding?" }]
+        }
+      },
+      {
+        key: { text: "What is your full name?" },
+        value: { text: data['applicant-name'] or "Not provided" },
+        actions: {
+          items: [{ href: "/applicant-name", text: "Change", visuallyHiddenText: "what is your full name?" }]
+        }
+      },
+      {
+        key: { text: "What is the other parent's full name?" },
+        value: { text: data['other-parent-name'] or "Not provided" },
+        actions: {
+          items: [{ href: "/other-parent-name", text: "Change", visuallyHiddenText: "what is the other parent's full name?" }]
+        }
+      },
+      {
+        key: { text: "Give details of the children this arrangement covers" },
+        value: { text: data['children-details'] or "Not provided" },
+        actions: {
+          items: [{ href: "/children-details", text: "Change", visuallyHiddenText: "give details of the children this arrangement covers" }]
+        }
+      }
+      ]
+    }) }}
+
+    <form method="post" novalidate>
+      <input type="hidden" name="_csrf" value="{{ csrf }}">
+      {{ govukButton({ text: "Confirm and send" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
