@@ -1,0 +1,48 @@
+{% extends "govuk/template.njk" %}
+
+{% block pageTitle %}{{ 'Error: ' if errors and errors['children-details'] }}Give details of the children this arrangement covers – {{ serviceName }} – GOV.UK{% endblock %}
+
+{% block header %}
+  {{ govukHeader({
+    homepageUrl: "https://www.gov.uk",
+    serviceName: serviceName,
+    serviceUrl: "/"
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors['children-details'] %}
+      {{ govukErrorSummary({
+        titleText: "There is a problem",
+        errorList: [{ text: errors['children-details'], href: "#children-details" }]
+      }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+      <input type="hidden" name="_csrf" value="{{ csrf }}">
+
+    {{ govukTextarea({
+      id: "children-details",
+      name: "children-details",
+      label: {
+        text: "Give details of the children this arrangement covers",
+        isPageHeading: true,
+        classes: "govuk-label--l"
+      },
+      hint: { text: "Include each child's full name and date of birth on separate lines." },
+      errorMessage: errors and errors['children-details'] and { text: errors['children-details'] },
+      value: data['children-details'],
+      rows: 5
+    }) }}
+
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
