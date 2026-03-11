@@ -1,0 +1,35 @@
+{% extends "govuk/template.njk" %}
+
+{% block pageTitle %}{{ serviceName }} – GOV.UK{% endblock %}
+
+{% block header %}
+  {{ govukHeader({
+    homepageUrl: "https://www.gov.uk",
+    serviceName: serviceName,
+    serviceUrl: "/"
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">Apply for a consent order for child arrangements</h1>
+    <p class="govuk-body">Use this service to make your child arrangements agreement legally binding through the court.</p>
+
+    <p class="govuk-body">Use this service to:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>your existing parenting plan or written agreement</li>
+      <li>details of both parents</li>
+      <li>information about your children</li>
+    </ul>
+
+    <p class="govuk-body">It takes around <strong>15 minutes</strong> to complete.</p>
+
+    {{ govukButton({
+      text: "Start now",
+      href: "/have-existing-agreement",
+      isStartButton: true
+    }) }}
+  </div>
+</div>
+{% endblock %}
