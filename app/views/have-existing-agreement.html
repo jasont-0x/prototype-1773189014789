@@ -1,0 +1,52 @@
+{% extends "govuk/template.njk" %}
+
+{% block pageTitle %}{{ 'Error: ' if errors and errors['have-existing-agreement'] }}Do you have an existing written agreement about child arrangements? – {{ serviceName }} – GOV.UK{% endblock %}
+
+{% block header %}
+  {{ govukHeader({
+    homepageUrl: "https://www.gov.uk",
+    serviceName: serviceName,
+    serviceUrl: "/"
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors['have-existing-agreement'] %}
+      {{ govukErrorSummary({
+        titleText: "There is a problem",
+        errorList: [{ text: errors['have-existing-agreement'], href: "#have-existing-agreement" }]
+      }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+      <input type="hidden" name="_csrf" value="{{ csrf }}">
+
+    {{ govukRadios({
+      name: "have-existing-agreement",
+      fieldset: {
+        legend: {
+          text: "Do you have an existing written agreement about child arrangements?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      hint: { text: "This could be a parenting plan or other written agreement between both parents." },
+      errorMessage: errors and errors['have-existing-agreement'] and { text: errors['have-existing-agreement'] },
+      value: data['have-existing-agreement'],
+      items: [
+        { value: "yes", text: "Yes" },
+        { value: "no", text: "No" }
+      ]
+    }) }}
+
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
