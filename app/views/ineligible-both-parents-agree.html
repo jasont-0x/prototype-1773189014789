@@ -1,0 +1,28 @@
+{% extends "govuk/template.njk" %}
+
+{% block pageTitle %}You cannot use this service – {{ serviceName }} – GOV.UK{% endblock %}
+
+{% block header %}
+  {{ govukHeader({
+    homepageUrl: "https://www.gov.uk",
+    serviceName: serviceName,
+    serviceUrl: "/"
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    <h1 class="govuk-heading-xl">You cannot use this service</h1>
+
+    <p class="govuk-body">Both parents must agree before you can apply for a consent order. If you disagree, you may need to apply for a different type of court order or try mediation.</p>
+
+    <h2 class="govuk-heading-m">What you can do</h2>
+    <p class="govuk-body">If you think this is wrong, <a href="/" class="govuk-link">start again</a> or contact us for help.</p>
+
+  </div>
+</div>
+{% endblock %}
