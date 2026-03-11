@@ -1,0 +1,16 @@
+{
+  "name": "apply-for-a-consent-order-for-child-arrangements",
+  "version": "1.0.0",
+  "description": "Apply for a consent order for child arrangements",
+  "main": "node_modules/govuk-prototype-kit/listen-on-port.js",
+  "scripts": {
+    "start": "node node_modules/govuk-prototype-kit/listen-on-port.js",
+    "dev": "node node_modules/govuk-prototype-kit/listen-on-port.js"
+  },
+  "engines": {
+    "node": "22.x"
+  },
+  "dependencies": {
+    "govuk-prototype-kit": "^13.16.2"
+  }
+}
